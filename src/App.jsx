@@ -9,6 +9,7 @@ import Profile from './assets/pages/Profile';
 import Admin from './assets/pages/Admin';
 import DriverProfile from './assets/pages/DriverProfile';
 import DriverRegister from './assets/pages/DriverRegister';
+import Trips from './assets/pages/Trips';
 
 function App() {
   // Foydalanuvchi tizimga kirganligini tekshirish (Local storage orqali saqlaymiz)
@@ -63,6 +64,7 @@ function App() {
             
             {/* 2. Asosiy Qidiruv: Faqat tizimga kirganlar uchun */}
             <Route path="/" element={isAuth ? <Home /> : <Navigate to="/login" />} />
+            <Route path="/trips" element={isAuth ? <Trips /> : <Navigate to="/login" />} />
             
             {/* 3. O'rindiq tanlash */}
             <Route path="/seats" element={isAuth ? <Seats /> : <Navigate to="/login" />} />
