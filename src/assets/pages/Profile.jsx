@@ -83,7 +83,7 @@ const Profile = () => {
             <div className="w-24 h-24 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-4xl font-bold mx-auto mb-4 shadow-inner">
               {displayName.charAt(0)}
             </div>
-            <h2 className="text-xl font-bold text-gray-800 wrap-break-word">{currentUser?.email}</h2>
+            <h2 className="text-xl font-bold text-gray-800 break-all">{currentUser?.email}</h2>
             <p className="text-gray-500 mb-6 text-sm mt-1">Shaxsiy kabinet</p>
             
             <div className="flex flex-col gap-3">
@@ -137,14 +137,31 @@ const Profile = () => {
                     <div>
                       <span className="text-gray-500">Avtobus: </span>
                       <span className="font-medium text-gray-800 mr-4">{trip.busModel}</span> <br className="md:hidden" />
+                      
+                      {/* O'rindiq: Ham eski (seats) ham yangi (seatNumber) ni tekshiradi */}
                       <span className="text-gray-500">O'rindiqlar: </span>
-                      <span className="font-bold text-gray-800">{trip.seats ? trip.seats.join(', ') : ''}</span>
+                      <span className="font-bold text-gray-800">
+                        {trip.seats ? trip.seats.join(', ') : trip.seatNumber}
+                      </span>
                     </div>
                     <div className="text-right">
-                      <span className="text-gray-500 block md:inline">Jami to'langan: </span>
-                      <span className="font-black text-blue-600 text-lg">{trip.totalPrice ? trip.totalPrice.toLocaleString() : 0} so'm</span>
+                      <span className="text-gray-500 block md:inline">To'langan: </span>
+                      
+                      {/* Narx: Ham eski (totalPrice) ham yangi (price) ni tekshiradi */}
+                      <span className="font-black text-blue-600 text-lg">
+                        {(trip.totalPrice || trip.price || 0).toLocaleString()} so'm
+                      </span>
                     </div>
                   </div>
+
+                  {/* Yangi tizimdagi yo'lovchi ismini ham ko'rsatib qo'yamiz (ixtiyoriy) */}
+                  {trip.passengerName && (
+                    <div className="mt-3 pt-3 border-t border-dashed border-gray-100">
+                      <span className="text-gray-500 text-xs uppercase font-bold">Yo'lovchi:</span>
+                      <span className="text-gray-800 text-sm font-medium ml-2">{trip.passengerName}</span>
+                    </div>
+                  )}
+
                 </div>
               ))
             )}
